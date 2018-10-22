@@ -1,0 +1,33 @@
+Downloading MongoDB:
+
+cd ~
+mkdir percona
+cd percona
+
+# Download and configuration
+
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.3.tgz
+tar -xvzf https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.3.tgz
+mv linux/mongodb-linux-x86_64-4.0.3 mongo4
+export PATH=$PATH:$(pwd)/mongo4/bin
+
+# Starting Single Instance:
+# check if there is no other mongod process running.
+
+mkdir single_instance
+mongod --dbpath single_instance \ 
+       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
+       --wiredTigerCacheSizeGB 0.3 --fork
+       
+# Connect to the running instance and run some commands:
+mongo
+show dbs
+use percona
+db.foo.insert({today : new Date()})
+
+
+
+
+
+
+
