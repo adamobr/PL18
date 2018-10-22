@@ -32,24 +32,16 @@ killall mongod
 #moving the data from the single instance to a new folder with the replicaset.
 mv single_instance replica1/instance1
 
-# creating 2 empty data folder.
-mkdir replica1/instance2
-mkdir replica1/instance3
+# creating folders for the shard and replicaset.
+mkdir -p replicaset1/i1 replicaset1/i2 replicaset1/i3
+mkdir -p replicaset2/i1 replicaset2/i2 replicaset2/i3
+mkdir -p replicasetcfg/i1 replicasetcfg/i2 replicasetcfg/i3 
+
 
 #starting the instances
-
-mongod --dbpath replica1/instance1 \ 
-       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
-       --wiredTigerCacheSizeGB 0.3 --fork --replset replica1 --port 27001 --auth
-       
-mongod --dbpath replica1/instance2 \ 
-       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
-       --wiredTigerCacheSizeGB 0.3 --fork --replset replica1 --port 27002 --auth
-
-mongod --dbpath replica1/instance3 \ 
-       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
-       --wiredTigerCacheSizeGB 0.3 --fork --replset replica1 --port 27003 --auth
-       
+mongod -f rs1i1.cfg
+mongod -f rs1i2.cfg
+mongod -f rs1i3.cfg
 
 #connect to the first instance
 mongo --port 27001
@@ -61,5 +53,8 @@ rs.add('yourip:27002')
 
 #generating a keyfile
 openssl rand -base64 128 > mykey.key
+chmod 600 mykey.key
 
-Minimal configuration file: Check: 
+# Adding keyfile to the config
+
+
