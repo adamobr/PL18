@@ -26,8 +26,40 @@ use percona
 db.foo.insert({today : new Date()})
 
 
+# killing single instance and configuring a replicaset;
+killall mongod 
 
+#moving the data from the single instance to a new folder with the replicaset.
+mv single_instance replica1/instance1
 
+# creating 2 empty data folder.
+mkdir replica1/instance2
+mkdir replica1/instance3
 
+#starting the instances
 
+mongod --dbpath replica1/instance1 \ 
+       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
+       --wiredTigerCacheSizeGB 0.3 --fork --replset replica1 --port 27001 --auth
+       
+mongod --dbpath replica1/instance2 \ 
+       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
+       --wiredTigerCacheSizeGB 0.3 --fork --replset replica1 --port 27002 --auth
 
+mongod --dbpath replica1/instance3 \ 
+       --logpath single_instance/log.log --bind_ip 127.0.0.1,192.168.88.110\
+       --wiredTigerCacheSizeGB 0.3 --fork --replset replica1 --port 27003 --auth
+       
+
+#connect to the first instance
+mongo --port 27001
+> rs.initiate()
+PRIMARY> rs.status()
+
+#adding new members:
+rs.add('yourip:27002')
+
+#generating a keyfile
+openssl rand -base64 128 > mykey.key
+
+Minimal configuration file: Check: 
