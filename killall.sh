@@ -1,0 +1,2 @@
+killall mongod
+killall mongos
