@@ -48,7 +48,7 @@ else
   tar xf mongodb-linux-x86_64-4.0.3.tar -C ~/percona/mongo4 --strip-components=1
    
   echo "Cleaning up compressed files"
-  rm mongodb-linux-x86_64-4.0.3.tgz      
+  rm mongodb-linux-x86_64-4.0.3.tar      
 fi
 
 cd ~/percona
