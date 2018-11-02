@@ -7,7 +7,7 @@ cd percona
 #single instance test
 rm -rf single_instance && mkdir single_instance
 #replicaset test
-rm -rf rs1_1 rs1_2 rs1_3 && mkdir rs1_1 rs1_2 rs1_3
+rm -rf rs1_1 rs1_2 rs1_3 rs1_arb && mkdir rs1_1 rs1_2 rs1_3 rs1_arb
 #replicaset 2 test
 rm -rf rs2_1 rs2_2 rs2_3 && mkdir rs2_1 rs2_2 rs2_3
 #config and mongos files
