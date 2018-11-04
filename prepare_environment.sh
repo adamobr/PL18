@@ -14,7 +14,8 @@ rm -rf rs2_1 rs2_2 rs2_3 && mkdir rs2_1 rs2_2 rs2_3
 rm -rf mongos_files mongoconfig && mkdir mongos_files mongoconfig
 # Template files
 rm -rf examples && mkdir examples
-rm -rf mongo4 && mkdir mongo4
+rm -rf mongo4
+mkdir mongo4
 rm -rf mongo
 
 # downloading mongodb - you may need to find the best distro
@@ -27,7 +28,7 @@ then
   
   echo -e "Decompressing downloads"
   gzip -d mongodb-osx-ssl-x86_64-4.0.3.tgz
-  tar xf mongodb-osx-ssl-x86_64-4.0.3.tar -C /mongo4 --strip-components=1
+  tar xf mongodb-osx-ssl-x86_64-4.0.3.tar -C ~/percona/mongo4 --strip-components=1
         
   echo "Cleaning up compressed files"
   rm mongodb-osx-ssl-x86_64-4.0.3.tar
