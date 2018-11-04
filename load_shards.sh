@@ -1,0 +1,1 @@
+/Users/adamo/percona/mongo/mongo 127.0.0.1:27017/percona_shard --eval "for (x=1;x<10000000;x++) {db.foo.insert({'x' : x}); db.foo2.insert({'x' : x})}; "

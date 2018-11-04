@@ -32,6 +32,6 @@ mv ~/percona/PL18/config_files/shard/*.cfg ~/percona/PL18/config_files/replaced/
 
 ~/percona/mongo/mongo --port 27019 --eval "rs.initiate()"
 
-sleep(10)
+sleep 10
 ~/percona/mongo/mongos -f ~/percona/PL18/config_files/replaced/mongos.cfg
 
